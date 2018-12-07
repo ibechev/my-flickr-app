@@ -1,0 +1,19 @@
+{
+  "name": "my-flickr-app",
+  "version": "1.0.0",
+  "description": "my-flickr-app is an application that allows the user to search for a Flickr photos by tag name. The page loads 20 images initially and uses infinite scroller.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ibechev/my-flickr-app.git"
+  },
+  "author": "Ivan Bechev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ibechev/my-flickr-app/issues"
+  },
+  "homepage": "https://github.com/ibechev/my-flickr-app#readme"
+}
