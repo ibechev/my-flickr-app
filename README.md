@@ -4,9 +4,9 @@ An app that allows the user to search for a Flickr photos by tag name. The page 
 
 ## Basic Tech Stack
 
-Symphony is built using the [React-Express Template]("template Url"), which uses **React**, **Express** and **Webpack 4**. The project also uses the framework **Jest** and **Enzyme** for testing.
+my-flickr-app is built with [React-Express-Webpack Template]("template Url"), which uses **React**, **Express** and **Webpack 4**. The project also includes the frameworks **Jest** and **Enzyme** for testing.
 
-###Current versions
+### Current versions
 
 - React 16.4
 - Express 4
@@ -18,7 +18,7 @@ Symphony is built using the [React-Express Template]("template Url"), which uses
 - Enzyme 3
 - ESLint 3
 
-##Development environment
+## Development environment
 
 ```sh
 git clone
@@ -35,7 +35,7 @@ npm start
 
 Project will open at [http://localhost:3000/](http://localhost:3000/)
 
-##Production environment
+## Production environment
 
 For production, run the 'build' script to transpile code to 'dist' folder. The 'start:dist' script runs the production code in localhost to ensure the app is running correctly usine 'dist' filder files:
 
