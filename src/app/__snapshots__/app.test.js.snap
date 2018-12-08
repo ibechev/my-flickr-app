@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Expect <App /> to render correctly 1`] = `
+<div
+  className="app"
+>
+  <h1>
+    Hey hey hey
+  </h1>
+  <ul>
+    <li>
+      Express
+    </li>
+    <li>
+      React
+    </li>
+    <li>
+      Webpack
+    </li>
+    <li>
+      HMR
+    </li>
+    <li>
+      SCSS
+    </li>
+    <li>
+      Jest
+    </li>
+    <li>
+      Enzyme
+    </li>
+    <li>
+      ESLint
+    </li>
+  </ul>
+</div>
+`;

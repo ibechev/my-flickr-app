@@ -1,0 +1,31 @@
+@import "assets/scss/reset";
+@import "assets/scss/fonts";
+@import "assets/scss/icons";
+@import "assets/scss/base";
+@import "components/index";
+
+.app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h1 {
+    padding: 0 1rem 1rem;
+    border-bottom: 1px solid aliceblue;
+    letter-spacing: 2px;
+    text-align: center;
+    font-weight: 400;
+  }
+
+  ul {
+    margin-top: 5rem;
+
+    li {
+      letter-spacing: 1px;
+      text-align: center;
+      color: darken(aliceblue, 10%);
+    }
+  }
+}
