@@ -4,7 +4,8 @@
   "description": "my-flickr-app is an application that allows the user to search for a Flickr photos by tag name. The page loads 20 images initially and uses infinite scroller.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "open:src": "babel-node build/server.js",
+    "start": "cross-env NODE_ENV=development npm-run-all open:src"
   },
   "repository": {
     "type": "git",
@@ -12,6 +13,37 @@
   },
   "author": "Ivan Bechev",
   "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.23.0",
+    "babel-core": "^6.23.3",
+    "babel-loader": "^7.1.4",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2017": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-register": "^6.24.1",
+    "babel-runtime": "^6.26.0",
+    "cross-env": "^3.1.4",
+    "css-loader": "^0.26.1",
+    "eventsource-polyfill": "^0.9.6",
+    "express": "^4.14.1",
+    "file-loader": "^0.8.5",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.4.2",
+    "node-sass": "^4.9.3",
+    "npm-run-all": "^4.0.1",
+    "open": "0.0.5",
+    "prop-types": "^15.6.0",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "sass-loader": "^6.0.5",
+    "style-loader": "^0.16.1",
+    "url-loader": "^1.1.1",
+    "webpack": "^4.21.0",
+    "webpack-dev-middleware": "^3.2.0",
+    "webpack-hot-middleware": "^2.23.0"
+  },
   "bugs": {
     "url": "https://github.com/ibechev/my-flickr-app/issues"
   },
