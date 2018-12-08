@@ -7,7 +7,6 @@ exports[`Expect <App /> to render correctly 1`] = `
   <h1>
     Hey hey hey
   </h1>
-  <hr />
   <ul>
     <li>
       Express
@@ -23,6 +22,15 @@ exports[`Expect <App /> to render correctly 1`] = `
     </li>
     <li>
       SCSS
+    </li>
+    <li>
+      Jest
+    </li>
+    <li>
+      Enzyme
+    </li>
+    <li>
+      ESLint
     </li>
   </ul>
 </div>

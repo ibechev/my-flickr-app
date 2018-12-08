@@ -18,6 +18,6 @@ if (DEVELOPMENT) {
 }
 
 render(
-  <App message="Hello, I'm a boilerplate" />,
+  <App message="Hello, I'm React & Express boilerplate" />,
   document.getElementById("root")
 );
