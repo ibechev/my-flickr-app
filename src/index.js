@@ -17,7 +17,4 @@ if (DEVELOPMENT) {
   }
 }
 
-render(
-  <App message="Hello, I'm React & Express boilerplate" />,
-  document.getElementById("root")
-);
+render(<App />, document.getElementById("root"));

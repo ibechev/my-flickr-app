@@ -1,0 +1,44 @@
+.search-box {
+  width: 70vw;
+  margin: 3rem auto 0;
+  padding: 0.7rem 0.7rem 0 0.7rem;
+  position: relative;
+  border-radius: 5px;
+  background-color: $primaryLight;
+
+  &:hover {
+    cursor: text;
+  }
+
+  .tags-list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    li:not(.tags) {
+      display: flex;
+      align-items: center;
+
+      .tags-input {
+        background-color: $primaryLight;
+        line-height: 1.4;
+        font-size: 1.8rem;
+      }
+    }
+
+    li {
+      margin-bottom: 0.7rem;
+    }
+  }
+
+  .placeholder {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $primaryDark;
+  }
+
+  @media screen and (max-width: 640px) {
+    width: 95%;
+  }
+}
