@@ -12,11 +12,12 @@ export class SearchBox extends Component {
     this.removeAllTags = this.removeAllTags.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
     this.searchBoxFocus = this.searchBoxFocus.bind(this);
 
     this.inputId = "tags-input";
     this.searchBoxId = "search-box";
-    this.placeholder = "Enter tags here ...";
+    this.placeholder = "... Enter tags here. Separate with space or comma";
 
     this.state = {
       tags: [],
@@ -81,10 +82,11 @@ export class SearchBox extends Component {
   }
 
   removeAllTags() {
-    this.setState(prevState => ({
-      ...prevState,
-      tags: []
-    }));
+    this.state.tags.length &&
+      this.setState(prevState => ({
+        ...prevState,
+        tags: []
+      }));
   }
 
   handleKeyDown(e) {
@@ -130,6 +132,11 @@ export class SearchBox extends Component {
     }));
   }
 
+  handleSearch() {
+    const { tags } = this.state;
+    length && this.props.search(tags);
+  }
+
   render() {
     const { inFocus, tags, inputIsEmpty } = this.state;
 
@@ -139,33 +146,47 @@ export class SearchBox extends Component {
         className={`search-box ${inFocus ? "focus" : ""}`}
         onClick={this.searchBoxFocus}
       >
-        <ul className="tags-list">
-          {tags.map((tag, i) => (
-            <Tag key={i} index={i} value={tag} removeTag={this.removeTag} />
-          ))}
+        <section className="tags">
+          <ul className="tags-wrapper">
+            {tags.map((tag, i) => (
+              <Tag key={i} index={i} value={tag} removeTag={this.removeTag} />
+            ))}
 
-          <li>
-            <input
-              id={this.inputId}
-              type="text"
-              className="tags-input"
-              size="4"
-              autoComplete="off"
-              onKeyDown={this.handleKeyDown}
-              onChange={this.handleChange}
-            />
-          </li>
-        </ul>
-        {!tags.length && inputIsEmpty && (
-          <span className="placeholder">{this.placeholder}</span>
-        )}
+            <li className="tags-input-wrapper">
+              <input
+                id={this.inputId}
+                type="text"
+                className="tags-input"
+                size="4"
+                autoComplete="off"
+                onKeyDown={this.handleKeyDown}
+                onChange={this.handleChange}
+                autoFocus
+              />
+            </li>
+          </ul>
+          {!tags.length && inputIsEmpty && (
+            <span className="placeholder">{this.placeholder}</span>
+          )}
+        </section>
+
+        <section className="controls">
+          <button className="clear" onClick={this.removeAllTags}>
+            <i className="far fa-trash-alt" />
+            Clear
+          </button>
+          <button className="search">
+            <i className="fas fa-search" />
+            Search
+          </button>
+        </section>
       </section>
     );
   }
 }
 
 SearchBox.propTypes = {
-  handleSearch: PropTypes.func.isRequired
+  search: PropTypes.func.isRequired
 };
 
 export default onClickOutside(SearchBox);

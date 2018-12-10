@@ -9,6 +9,12 @@ $primaryLight: lighten($primary, 10%);
 $primaryDark: darken($primary, 10%);
 $primaryVeryDark: darken($primary, 20%);
 
+$success: #16a085;
+$successHover: lighten($success, 10%);
+
+$warning: #c0392b;
+$warningHover: lighten($warning, 10%);
+
 $primaryText: #2c3e50;
 $secondaryText: lighten($primaryText, 10%);
 

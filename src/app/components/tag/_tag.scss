@@ -1,7 +1,7 @@
 .tag {
   display: flex;
-  align-items: flex-end;
-  margin-right: 0.7rem;
+  align-items: center;
+  margin: 0 0.4rem 0.35rem 0;
   padding: 0 0.5rem;
   border-radius: 5px;
   border: 1px solid $primary;
@@ -17,9 +17,11 @@
 
   button {
     background-color: transparent;
+    color: $warning;
 
     &:hover {
       cursor: pointer;
+      color: $warningHover;
     }
 
     i {
