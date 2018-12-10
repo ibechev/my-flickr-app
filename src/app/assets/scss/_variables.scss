@@ -3,15 +3,19 @@
 //
 
 // Basic schema
+$primary: #c6bfbc;
+$primaryVeryLight: lighten($primary, 20%);
+$primaryLight: lighten($primary, 10%);
+$primaryDark: darken($primary, 10%);
+$primaryVeryDark: darken($primary, 20%);
 
-// primary
+$success: #16a085;
+$successHover: lighten($success, 10%);
 
-// secondary
+$warning: #c0392b;
+$warningHover: lighten($warning, 10%);
 
-// success
+$primaryText: #2c3e50;
+$secondaryText: lighten($primaryText, 10%);
 
-// warning
-
-//
-// === Fonts ===
-//
+$pageBackground: #fffbf7;

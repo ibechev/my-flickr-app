@@ -17,8 +17,8 @@ body {
 }
 
 html {
-  background-color: mediumslateblue;
-  color: aliceblue;
+  background-color: $pageBackground;
+  color: $secondaryText;
   font: 62.5%/1.4 Arial, Verdana sans-serif;
   scroll-behavior: smooth;
 }
@@ -80,7 +80,7 @@ input[type="text"],
 input[type="time"],
 input[type="url"],
 input[type="week"] {
-  color: aliceblue;
+  color: $secondaryText;
 }
 
 button {
@@ -91,8 +91,4 @@ button {
   html {
     font: 55%/1.4 Arial, Verdana sans-serif;
   }
-}
-
-%no-text-select {
-  user-select: none;
 }

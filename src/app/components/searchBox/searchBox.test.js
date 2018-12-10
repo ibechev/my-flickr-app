@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import App from "./App";
+import SearchBox from "./SearchBox";
 
 describe("Expect <App />", () => {
   it("to render correctly", () => {
