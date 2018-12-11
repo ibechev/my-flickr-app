@@ -5,28 +5,24 @@
 @import "assets/scss/base";
 @import "components/index";
 
-.app {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.main-container {
+  position: relative;
+  min-height: 100vh;
+  overflow: auto;
 
-  h1 {
-    padding: 0 1rem 1rem;
-    border-bottom: 1px solid aliceblue;
-    letter-spacing: 2px;
+  .spinner-main {
+    position: absolute;
+    top: 35%;
+    width: 100%;
+    font-size: 20rem;
     text-align: center;
-    font-weight: 400;
+    color: $primaryLight;
   }
 
-  ul {
-    margin-top: 5rem;
-
-    li {
-      letter-spacing: 1px;
-      text-align: center;
-      color: darken(aliceblue, 10%);
-    }
+  .spinner-scroll {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+    font-size: 2rem;
   }
 }

@@ -1,83 +1,87 @@
-.search-box {
-  width: 70vw;
-  margin: 3rem auto 0;
-  padding: 0.7rem;
-  border-radius: 5px;
-  background-color: $primaryVeryLight;
-  border: 1px solid $primary;
+.search-box-wrapper {
+  padding: 2rem 0 5rem;
 
-  .tags {
-    position: relative;
-    margin-bottom: 0.7rem;
+  .search-box {
+    width: 70vw;
+    margin: 0 auto;
+    padding: 0.7rem;
+    border-radius: 5px;
+    background-color: $primaryVeryLight;
+    border: 1px solid $primary;
 
-    &:hover {
-      cursor: text;
-    }
-
-    .tags-wrapper {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      padding-top: 0.35rem;
-
-      .tags-input-wrapper {
-        display: flex;
-        align-items: center;
-        margin-bottom: 0.35rem;
-
-        .tags-input {
-          background-color: transparent;
-          line-height: 1.4;
-          font-size: 1.8rem;
-        }
-      }
-    }
-    .placeholder {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      line-height: 1.6;
-      color: $primaryDark;
-    }
-  }
-
-  .controls {
-    padding: 1.4rem 0 0.7rem;
-    display: flex;
-    justify-content: space-between;
-    border-top: 1px solid $primary;
-
-    button {
-      padding: 0 0.7rem;
-      background-color: transparent;
-      font-size: 1.8rem;
-      i {
-        margin-right: 0.5rem;
-      }
+    .tags {
+      position: relative;
+      margin-bottom: 0.7rem;
 
       &:hover {
-        cursor: pointer;
+        cursor: text;
       }
 
-      &.clear {
-        color: $warning;
+      .tags-wrapper {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        padding-top: 0.35rem;
 
-        &:hover {
-          color: $warningHover;
+        .tags-input-wrapper {
+          display: flex;
+          align-items: center;
+          margin-bottom: 0.35rem;
+
+          .tags-input {
+            background-color: transparent;
+            line-height: 1.4;
+            font-size: 1.8rem;
+          }
         }
       }
+      .placeholder {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        line-height: 1.6;
+        color: $primaryDark;
+      }
+    }
 
-      &.search {
-        color: $success;
+    .controls {
+      padding: 1.4rem 0 0.7rem;
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid $primary;
+
+      button {
+        padding: 0 0.7rem;
+        background-color: transparent;
+        font-size: 1.8rem;
+        i {
+          margin-right: 0.5rem;
+        }
 
         &:hover {
-          color: $successHover;
+          cursor: pointer;
+        }
+
+        &.clear {
+          color: $warning;
+
+          &:hover {
+            color: $warningHover;
+          }
+        }
+
+        &.search {
+          color: $success;
+
+          &:hover {
+            color: $successHover;
+          }
         }
       }
     }
-  }
 
-  @media screen and (max-width: 640px) {
-    width: 95%;
+    @media screen and (max-width: 640px) {
+      width: 95%;
+    }
   }
 }
