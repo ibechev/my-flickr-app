@@ -1,0 +1,121 @@
+.image-card {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 2rem 0;
+  border: 1px solid $primary;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: $shadow;
+
+  .header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0 1rem 2rem;
+
+    .header-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding-right: 1.5rem;
+      width: 90%;
+
+      h6 {
+        width: 100%;
+        margin-bottom: 0.5rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        text-transform: uppercase;
+        font-style: italic;
+        letter-spacing: 0.5px;
+        color: $primaryText;
+      }
+
+      p {
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 1rem;
+        font-style: italic;
+        letter-spacing: 0.5px;
+        color: $secondaryText;
+      }
+    }
+
+    .flickr-link {
+      width: 10%;
+
+      a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        i {
+          font-size: 2.5rem;
+          color: $flickrPink;
+          transition: color 0.1s ease-in-out;
+        }
+
+        p {
+          font-size: 0.8rem;
+          color: $secondaryText;
+        }
+
+        &:hover {
+          i {
+            color: darken($flickrPink, 10%);
+          }
+        }
+      }
+    }
+  }
+
+  .image-wrapper {
+    width: auto;
+    height: 15rem;
+    margin: 0 1rem 2rem;
+    overflow: hidden;
+
+    img {
+      display: block;
+      width: auto;
+      margin: 0 auto;
+      height: 100%;
+    }
+  }
+
+  .footer {
+    height: 12rem;
+    padding: 0 1rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: scroll;
+
+    i {
+      font-size: 2.5rem;
+      color: $primaryDark;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      padding-top: 1rem;
+
+      .listed-tag {
+        padding: 0 0.5rem;
+        margin: 0 0.5rem 0.5rem 0;
+        border-radius: 5px;
+        border: 1px solid $primary;
+        background-color: $primaryVeryLight;
+        font-size: 1rem;
+      }
+    }
+  }
+}

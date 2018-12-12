@@ -15,7 +15,13 @@ $successHover: lighten($success, 10%);
 $warning: #c0392b;
 $warningHover: lighten($warning, 10%);
 
-$primaryText: #2c3e50;
-$secondaryText: lighten($primaryText, 10%);
+$primaryText: #3e5871;
+$secondaryText: lighten($primaryText, 30%);
 
 $pageBackground: #fffbf7;
+
+$flickrPink: #fe0084;
+$flickrBlue: #256ed7;
+
+$shadow: 0 10px 12px -7px $primaryDark, -4px 0 12px -7px $primaryDark,
+  4px 0 12px -7px $primaryDark;

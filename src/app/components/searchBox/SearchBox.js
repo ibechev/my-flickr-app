@@ -16,11 +16,10 @@ export class SearchBox extends Component {
     this.searchBoxFocus = this.searchBoxFocus.bind(this);
 
     this.inputId = "tags-input";
-    this.searchBoxId = "search-box";
     this.placeholder = "... Enter tags here. Separate with space or comma";
 
     this.state = {
-      tags: [],
+      tags: ["sky", "sea", "sunset"],
       error: undefined,
       inputIsEmpty: true,
       inFocus: true
@@ -134,53 +133,55 @@ export class SearchBox extends Component {
 
   handleSearch() {
     const { tags } = this.state;
-    length && this.props.search(tags);
+    tags.length && this.props.search(tags);
   }
 
   render() {
     const { inFocus, tags, inputIsEmpty } = this.state;
 
     return (
-      <section
-        id={this.searchBoxId}
-        className={`search-box ${inFocus ? "focus" : ""}`}
-        onClick={this.searchBoxFocus}
-      >
-        <section className="tags">
-          <ul className="tags-wrapper">
-            {tags.map((tag, i) => (
-              <Tag key={i} index={i} value={tag} removeTag={this.removeTag} />
-            ))}
+      <div className="search-box-wrapper" id="search-box-wrapper">
+        <section
+          id="search-box"
+          className={`search-box ${inFocus ? "focus" : ""}`}
+          onClick={this.searchBoxFocus}
+        >
+          <section className="tags">
+            <ul className="tags-wrapper">
+              {tags.map((tag, i) => (
+                <Tag key={i} index={i} value={tag} removeTag={this.removeTag} />
+              ))}
 
-            <li className="tags-input-wrapper">
-              <input
-                id={this.inputId}
-                type="text"
-                className="tags-input"
-                size="4"
-                autoComplete="off"
-                onKeyDown={this.handleKeyDown}
-                onChange={this.handleChange}
-                autoFocus
-              />
-            </li>
-          </ul>
-          {!tags.length && inputIsEmpty && (
-            <span className="placeholder">{this.placeholder}</span>
-          )}
-        </section>
+              <li className="tags-input-wrapper">
+                <input
+                  id={this.inputId}
+                  type="text"
+                  className="tags-input"
+                  size="4"
+                  autoComplete="off"
+                  onKeyDown={this.handleKeyDown}
+                  onChange={this.handleChange}
+                  autoFocus
+                />
+              </li>
+            </ul>
+            {!tags.length && inputIsEmpty && (
+              <span className="placeholder">{this.placeholder}</span>
+            )}
+          </section>
 
-        <section className="controls">
-          <button className="clear" onClick={this.removeAllTags}>
-            <i className="far fa-trash-alt" />
-            Clear
-          </button>
-          <button className="search">
-            <i className="fas fa-search" />
-            Search
-          </button>
+          <section className="controls">
+            <button className="clear" onClick={this.removeAllTags}>
+              <i className="far fa-trash-alt" />
+              Clear
+            </button>
+            <button className="search" onClick={this.handleSearch}>
+              <i className="fas fa-search" />
+              Search
+            </button>
+          </section>
         </section>
-      </section>
+      </div>
     );
   }
 }
