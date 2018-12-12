@@ -14,7 +14,7 @@ class App extends Component {
 
     this.state = {
       page: 1,
-      loadingMain: false,
+      loading: false,
       fetchingMore: false,
       noMorePages: false,
       images: [],
@@ -30,7 +30,7 @@ class App extends Component {
     this.setState(prevState => {
       return {
         ...prevState,
-        loadingMain: true
+        loading: true
       };
     });
 
@@ -39,7 +39,7 @@ class App extends Component {
     this.setState(prevState => {
       return {
         ...prevState,
-        loadingMain: false,
+        loading: false,
         images,
         tags: tagsArray
       };
@@ -69,8 +69,7 @@ class App extends Component {
 
   handleScroll() {
     const galleryH = document.getElementById("image-gallery").clientHeight;
-    const searchBoxH = document.getElementById("search-box-wrapper")
-      .clientHeight;
+    const searchBoxH = document.getElementById("search-box").clientHeight;
     const offsetTrigger = galleryH + searchBoxH - window.innerHeight;
     const { fetchingMore, noMorePages } = this.state;
 
@@ -80,23 +79,26 @@ class App extends Component {
   }
 
   render() {
-    const { images, loadingMain } = this.state;
+    const { images, loading } = this.state;
 
     return (
       <div className="main-container">
         <SearchBox search={this.search} />
-        {!loadingMain && <ImageGallery images={images} />}
-        {loadingMain && (
+        {!loading && <ImageGallery images={images} />}
+        {loading && (
           <span className="spinner-main">
             <i className="fas fa-spinner fa-spin" />
           </span>
         )}
-        {images.length && !loadingMain ? (
+        {images.length && !loading ? (
           <span className="spinner-scroll">
             <i className="fas fa-spinner fa-spin" />
           </span>
         ) : (
           ""
+        )}
+        {!images.length && !loading && (
+          <i className="fas fa-images images-placeholder" />
         )}
       </div>
     );

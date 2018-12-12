@@ -15,8 +15,9 @@ export class SearchBox extends Component {
     this.handleSearch = this.handleSearch.bind(this);
     this.searchBoxFocus = this.searchBoxFocus.bind(this);
 
-    this.inputId = "tags-input";
     this.placeholder = "... Enter tags here. Separate with space or comma";
+    this.input = React.createRef();
+    this.searchButton = React.createRef();
 
     this.state = {
       tags: ["sky", "sea", "sunset"],
@@ -28,7 +29,7 @@ export class SearchBox extends Component {
 
   addTag(e) {
     let tagValue = "";
-    const inputElement = document.getElementById(this.inputId);
+    const inputElement = this.input.current;
 
     if (e) {
       e.preventDefault();
@@ -95,12 +96,22 @@ export class SearchBox extends Component {
       target: { value }
     } = e;
 
-    if (keyCode === 13 || keyCode === 32 || keyCode === 188) {
-      this.addTag(e);
-    } else if (keyCode === 8) {
-      this.removeTag(e);
-    } else {
-      target.size = value.length > 3 ? value.length + 1 : 4;
+    switch (keyCode) {
+      case 13: // Enter
+        this.handleSearch();
+        break;
+
+      case 32: // Space
+      case 188: // Comma
+        this.addTag(e);
+        break;
+
+      case 8: // Backspace
+        this.removeTag(e);
+        break;
+
+      default:
+        target.size = value.length > 3 ? value.length + 1 : 4;
     }
   }
 
@@ -116,12 +127,14 @@ export class SearchBox extends Component {
     }
   }
 
-  searchBoxFocus() {
-    this.setState(prevState => ({
-      ...prevState,
-      inFocus: true
-    }));
-    document.getElementById(this.inputId).focus();
+  searchBoxFocus(e) {
+    if (e.target !== this.searchButton.current) {
+      this.setState(prevState => ({
+        ...prevState,
+        inFocus: true
+      }));
+      this.input.current.focus();
+    }
   }
 
   handleClickOutside() {
@@ -134,54 +147,59 @@ export class SearchBox extends Component {
   handleSearch() {
     const { tags } = this.state;
     tags.length && this.props.search(tags);
+    this.input.current.blur();
+    this.searchButton.current.blur();
   }
 
   render() {
     const { inFocus, tags, inputIsEmpty } = this.state;
 
     return (
-      <div className="search-box-wrapper" id="search-box-wrapper">
-        <section
-          id="search-box"
-          className={`search-box ${inFocus ? "focus" : ""}`}
-          onClick={this.searchBoxFocus}
-        >
-          <section className="tags">
-            <ul className="tags-wrapper">
-              {tags.map((tag, i) => (
-                <Tag key={i} index={i} value={tag} removeTag={this.removeTag} />
-              ))}
+      <section
+        id="search-box"
+        className={`search-box ${inFocus ? "focus" : ""}`}
+        onClick={this.searchBoxFocus}
+      >
+        <section className="tags">
+          <ul className="tags-wrapper">
+            {tags.map((tag, i) => (
+              <Tag key={i} index={i} value={tag} removeTag={this.removeTag} />
+            ))}
 
-              <li className="tags-input-wrapper">
-                <input
-                  id={this.inputId}
-                  type="text"
-                  className="tags-input"
-                  size="4"
-                  autoComplete="off"
-                  onKeyDown={this.handleKeyDown}
-                  onChange={this.handleChange}
-                  autoFocus
-                />
-              </li>
-            </ul>
-            {!tags.length && inputIsEmpty && (
-              <span className="placeholder">{this.placeholder}</span>
-            )}
-          </section>
-
-          <section className="controls">
-            <button className="clear" onClick={this.removeAllTags}>
-              <i className="far fa-trash-alt" />
-              Clear
-            </button>
-            <button className="search" onClick={this.handleSearch}>
-              <i className="fas fa-search" />
-              Search
-            </button>
-          </section>
+            <li className="tags-input-wrapper">
+              <input
+                id="tags-input"
+                type="text"
+                className="tags-input"
+                size="4"
+                autoComplete="off"
+                onKeyDown={this.handleKeyDown}
+                onChange={this.handleChange}
+                autoFocus
+                ref={this.input}
+              />
+            </li>
+          </ul>
+          {!tags.length && inputIsEmpty && (
+            <span className="placeholder">{this.placeholder}</span>
+          )}
         </section>
-      </div>
+
+        <section className="controls">
+          <button className="clear" onClick={this.removeAllTags}>
+            <i className="far fa-trash-alt" />
+            Clear
+          </button>
+          <button
+            className="search"
+            onClick={this.handleSearch}
+            ref={this.searchButton}
+          >
+            <i className="fas fa-search" />
+            Search
+          </button>
+        </section>
+      </section>
     );
   }
 }
