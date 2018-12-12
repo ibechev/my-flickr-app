@@ -1,2 +1,12 @@
 .image-gallery {
+  max-width: 1440px;
+  margin: 0 auto;
+
+  .images-container {
+    padding: 0 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 3rem 2rem;
+    grid-auto-rows: 40rem;
+  }
 }

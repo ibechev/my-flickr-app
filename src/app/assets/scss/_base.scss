@@ -18,7 +18,7 @@ body {
 
 html {
   background-color: $pageBackground;
-  color: $secondaryText;
+  color: $primaryText;
   font: 62.5%/1.4 Arial, Verdana sans-serif;
   scroll-behavior: smooth;
 }
@@ -85,6 +85,13 @@ input[type="week"] {
 
 button {
   font-size: 1.6rem;
+}
+
+button,
+a {
+  &:focus {
+    outline: 3px solid #7c7ed8;
+  }
 }
 
 @media screen and (max-width: 640px) {
