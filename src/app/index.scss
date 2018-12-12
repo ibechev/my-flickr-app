@@ -25,4 +25,13 @@
     padding: 2rem 0;
     font-size: 2rem;
   }
+
+  .images-placeholder {
+    position: absolute;
+    top: 35%;
+    width: 100%;
+    font-size: 25rem;
+    text-align: center;
+    color: $primaryLight;
+  }
 }

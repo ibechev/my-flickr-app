@@ -80,7 +80,7 @@ input[type="text"],
 input[type="time"],
 input[type="url"],
 input[type="week"] {
-  color: $secondaryText;
+  color: $primaryText;
 }
 
 button {
@@ -91,6 +91,10 @@ button,
 a {
   &:focus {
     outline: 3px solid #7c7ed8;
+  }
+
+  &:active {
+    outline: none;
   }
 }
 
