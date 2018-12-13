@@ -3,10 +3,10 @@
   margin: 0 auto;
 
   .images-container {
-    padding: 0 1.5rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    @include grid;
+    @include grid-template-columns(repeat(auto-fill, minmax(250px, 1fr)));
     grid-gap: 3rem 2rem;
     grid-auto-rows: 40rem;
+    padding: 0 1.5rem;
   }
 }

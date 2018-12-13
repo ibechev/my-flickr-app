@@ -23,8 +23,12 @@ const ImageCard = ({ title, owner, tags, taken, flickrUrl, thumbnail }) => {
       <div className="image-wrapper">
         <img src={thumbnail} alt={title} />
       </div>
+
       <div className="footer">
-        <i className="fas fa-tag" />
+        <div className="tag-label">
+          <i className="fas fa-tags" />
+          <h6>Tags</h6>
+        </div>
         <ul className="tags">
           {tags.map((tag, i) => (
             <li key={i} className="listed-tag">

@@ -30,21 +30,22 @@ export class SearchBox extends Component {
   }
 
   addTag(e) {
-    let tagValue = "";
+    let inputValue = "";
     const input = this.input.current;
 
     if (e) {
+      e.preventDefault();
       // get value from onKeyDown event (comma or space)
-      tagValue = e.target.value.trim();
+      inputValue = e.target.value.trim();
     } else {
       // get value when the function is called from another function
-      tagValue = input && input.value.trim();
+      inputValue = input && input.value.trim();
     }
 
-    if (tagValue.length > 0) {
+    if (inputValue.length > 0) {
       this.setState(prevState => ({
         ...prevState,
-        tags: [...prevState.tags, tagValue],
+        tags: [...prevState.tags, inputValue],
         inputIsEmpty: true,
         error: null
       }));
