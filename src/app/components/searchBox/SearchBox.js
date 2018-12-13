@@ -105,10 +105,10 @@ export class SearchBox extends Component {
 
     switch (keyCode) {
       case 13: // Enter
-        (async () => {
-          await this.addTag();
-          this.handleSearch();
-        })();
+        // (async () => {
+        //   await this.addTag();
+        this.handleSearch();
+        // })();
         break;
 
       case 32: // Space
@@ -129,6 +129,7 @@ export class SearchBox extends Component {
   handleChange(e) {
     const { inputIsEmpty } = this.state;
     const inputElementIsEmpty = !e.target.value;
+    const { value } = e.target;
 
     if (inputElementIsEmpty !== inputIsEmpty) {
       this.setState(prevState => ({
@@ -136,6 +137,9 @@ export class SearchBox extends Component {
         inputIsEmpty: inputElementIsEmpty
       }));
     }
+
+    // Change the size of the input on value paste
+    e.target.size = value.length > 3 ? value.length + 1 : 4;
   }
 
   searchBoxFocus(e) {
@@ -156,8 +160,10 @@ export class SearchBox extends Component {
     }));
   }
 
-  handleSearch() {
+  async handleSearch() {
+    await this.addTag();
     const input = this.input.current;
+
     const { tags } = this.state;
 
     // Check for errors
