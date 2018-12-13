@@ -17,6 +17,7 @@ class App extends Component {
       loading: false,
       fetchingMore: false,
       noMorePages: false,
+      noResults: false,
       images: [],
       tags: []
     };
@@ -24,6 +25,10 @@ class App extends Component {
 
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll, false);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.handleScroll, false);
   }
 
   async search(tagsArray) {
@@ -34,16 +39,26 @@ class App extends Component {
       };
     });
 
-    const { images } = await getImages({ page: 1, tagsArray }).then(res => res);
+    const { images, pages } = await getImages({ page: 1, tagsArray }).then(
+      res => res
+    );
 
-    this.setState(prevState => {
-      return {
+    if (!images.length) {
+      this.setState(prevState => ({
         ...prevState,
         loading: false,
+        noResults: true
+      }));
+    } else {
+      this.setState(prevState => ({
+        ...prevState,
+        loading: false,
+        noResults: false,
+        noMorePages: pages === prevState.pages,
         images,
         tags: tagsArray
-      };
-    });
+      }));
+    }
   }
 
   async fetchMore() {
@@ -70,37 +85,48 @@ class App extends Component {
   handleScroll() {
     const galleryH = document.getElementById("image-gallery").clientHeight;
     const searchBoxH = document.getElementById("search-box").clientHeight;
-    const offsetTrigger = galleryH + searchBoxH - window.innerHeight;
-    const { fetchingMore, noMorePages } = this.state;
+    const offsetFetchTrigger = galleryH + searchBoxH - window.innerHeight;
+    const { fetchingMore, noMorePages, images } = this.state;
 
-    if (window.pageYOffset > offsetTrigger && !fetchingMore && !noMorePages) {
+    if (
+      window.pageYOffset > offsetFetchTrigger &&
+      !fetchingMore &&
+      !noMorePages &&
+      images.length
+    ) {
       this.fetchMore();
     }
   }
 
   render() {
-    const { images, loading, errors } = this.state;
+    const { images, loading, errors, noResults, noMorePages } = this.state;
 
     return (
       <div className="main-container">
         <SearchBox search={this.search} errors={errors} />
-        {!loading && <ImageGallery images={images} />}
+        {!loading && !noResults && <ImageGallery images={images} />}
         {loading && (
           <span className="spinner-main">
             <i className="fas fa-spinner fa-spin" />
           </span>
         )}
-        {images.length && !loading ? (
+        {images.length && !loading && !noMorePages && !noResults ? (
           <span className="spinner-scroll">
             <i className="fas fa-spinner fa-spin" />
           </span>
         ) : (
           ""
         )}
-        {!images.length && !loading && (
+        {!images.length && !loading && !noResults && (
           <div className="images-placeholder">
             <i className="fas fa-images " />
-            <h1>Search images in Fkickr</h1>
+            <h1>Search images on Fkickr</h1>
+          </div>
+        )}
+        {noResults && !loading && (
+          <div className="no-results-placeholder">
+            <i className="fas fa-frown" />
+            <h1>Oops, nothing found.</h1>
           </div>
         )}
       </div>
@@ -109,3 +135,7 @@ class App extends Component {
 }
 
 export default App;
+
+// sdwdadsdqw - no results
+
+// daskpda aposida;oisd more - 3 results
