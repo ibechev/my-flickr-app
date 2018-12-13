@@ -3,10 +3,10 @@
   margin: 4rem auto 5rem;
   max-width: 600px;
   padding: 0.7rem 1rem;
-  border-radius: 5px;
+  @include border-radius(5px);
   background-color: $primaryVeryLight;
   border: 1px solid $primary;
-  box-shadow: $shadow;
+  @include box-shadow($shadow);
   transition: border 0.1s ease-in-out;
 
   &.focus {
@@ -26,14 +26,14 @@
     }
 
     .tags-wrapper {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
+      @include flex;
+      @include align-items(center);
+      @include flex-wrap(wrap);
       padding-top: 0.35rem;
 
       .tags-input-wrapper {
-        display: flex;
-        align-items: center;
+        @include flex;
+        @include align-items(center);
         margin-bottom: 0.35rem;
 
         .tags-input {
@@ -46,16 +46,16 @@
     .placeholder {
       position: absolute;
       top: 50%;
-      transform: translateY(-50%);
+      @include transform(translateY(-50%));
       line-height: 1.6;
       color: $primaryDark;
     }
   }
 
   .controls {
+    @include flex;
+    @include justify-content(space-between);
     padding: 1.4rem 0 0.7rem;
-    display: flex;
-    justify-content: space-between;
     border-top: 1px solid $primary;
 
     button {

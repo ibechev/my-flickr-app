@@ -1,7 +1,7 @@
 @import "assets/scss/reset";
 @import "assets/scss/variables";
-@import "assets/scss/fonts";
 @import "assets/scss/icons";
+@import "assets/scss/mixins";
 @import "assets/scss/base";
 @import "components/index";
 
@@ -20,18 +20,24 @@
   }
 
   .spinner-scroll {
-    display: flex;
-    justify-content: center;
+    @include flex;
+    @include justify-content(center);
     padding: 2rem 0;
     font-size: 2rem;
   }
 
   .images-placeholder {
     position: absolute;
-    top: 35%;
+    top: 30vh;
     width: 100%;
     font-size: 25rem;
     text-align: center;
     color: $primaryLight;
+
+    h1 {
+      margin-top: 2rem;
+      font-size: 3rem;
+      letter-spacing: 0.5rem;
+    }
   }
 }

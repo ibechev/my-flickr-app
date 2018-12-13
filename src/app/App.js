@@ -98,7 +98,10 @@ class App extends Component {
           ""
         )}
         {!images.length && !loading && (
-          <i className="fas fa-images images-placeholder" />
+          <div className="images-placeholder">
+            <i className="fas fa-images " />
+            <h1>Search images in Fkickr</h1>
+          </div>
         )}
       </div>
     );

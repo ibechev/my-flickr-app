@@ -1,0 +1,79 @@
+//
+// FLEX
+//
+
+@mixin flex {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@mixin flex-direction($value) {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: $value;
+  -ms-flex-direction: $value;
+  flex-direction: $value;
+}
+
+@mixin justify-content($value) {
+  -webkit-box-pack: $value;
+  -webkit-justify-content: $value;
+  -ms-flex-pack: $value;
+  justify-content: $value;
+}
+
+@mixin align-items($value) {
+  -webkit-box-align: $value;
+  -webkit-align-items: $value;
+  -ms-flex-align: $value;
+  align-items: $value;
+}
+
+@mixin flex-wrap($value) {
+  -webkit-flex-wrap: $value;
+  -ms-flex-wrap: $value;
+  flex-wrap: $value;
+}
+
+//
+// GRID
+//
+
+@mixin grid {
+  display: -ms-grid;
+  display: grid;
+}
+
+@mixin grid-template-columns($value) {
+  -ms-grid-columns: $value;
+  grid-template-columns: $value;
+}
+
+@mixin border-radius($value) {
+  -webkit-border-radius: $value;
+  border-radius: $value;
+}
+
+@mixin box-shadow($values) {
+  -webkit-box-shadow: $values;
+  box-shadow: $values;
+}
+
+@mixin transform($value) {
+  -webkit-transform: $value;
+  -ms-transform: $value;
+  transform: $value;
+}
+
+@mixin text-overflow($value) {
+  -o-text-overflow: $value;
+  text-overflow: $value;
+}
+
+@mixin transition($value) {
+  -webkit-transition: $value;
+  -o-transition: $value;
+  transition: $value;
+}
