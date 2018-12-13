@@ -79,11 +79,11 @@ class App extends Component {
   }
 
   render() {
-    const { images, loading } = this.state;
+    const { images, loading, errors } = this.state;
 
     return (
       <div className="main-container">
-        <SearchBox search={this.search} />
+        <SearchBox search={this.search} errors={errors} />
         {!loading && <ImageGallery images={images} />}
         {loading && (
           <span className="spinner-main">
