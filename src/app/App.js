@@ -99,11 +99,11 @@ class App extends Component {
   }
 
   render() {
-    const { images, loading, errors, noResults, noMorePages } = this.state;
+    const { images, loading, noResults, noMorePages } = this.state;
 
     return (
       <div className="main-container">
-        <SearchBox search={this.search} errors={errors} />
+        <SearchBox search={this.search} />
         {!loading && !noResults && <ImageGallery images={images} />}
         {loading && (
           <span className="spinner-main">
@@ -135,7 +135,3 @@ class App extends Component {
 }
 
 export default App;
-
-// sdwdadsdqw - no results
-
-// daskpda aposida;oisd more - 3 results

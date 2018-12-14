@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Expect <Tag /> to render correctly 1`] = `
+<li
+  className="tag"
+>
+  <p
+    className="tag-name"
+  >
+    Tag name
+  </p>
+  <button
+    onClick={[Function]}
+    type="button"
+  >
+    <i
+      className="fas fa-trash-alt"
+    />
+  </button>
+</li>
+`;

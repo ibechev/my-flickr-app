@@ -22,7 +22,7 @@ export class SearchBox extends Component {
     this.searchButton = React.createRef();
 
     this.state = {
-      tags: ["sky", "sea", "sunset"],
+      tags: [],
       inputIsEmpty: true,
       inFocus: true,
       error: null
@@ -63,7 +63,7 @@ export class SearchBox extends Component {
 
       if (value.trim().length === 0 && this.state.tags.length) {
         this.setState(prevState => {
-          const tempTags = prevState.tags;
+          const tempTags = [...prevState.tags];
           tempTags.length && tempTags.pop();
 
           return {
@@ -105,10 +105,7 @@ export class SearchBox extends Component {
 
     switch (keyCode) {
       case 13: // Enter
-        // (async () => {
-        //   await this.addTag();
         this.handleSearch();
-        // })();
         break;
 
       case 32: // Space
@@ -166,14 +163,12 @@ export class SearchBox extends Component {
 
     const { tags } = this.state;
 
-    // Check for errors
     const error = searchValidation(tags);
 
     if (!error) {
       tags.length && this.props.search(tags);
       input.blur();
 
-      // clear any existing errors
       this.state.error &&
         this.setState(prevState => ({ ...prevState, error: null }));
     } else {

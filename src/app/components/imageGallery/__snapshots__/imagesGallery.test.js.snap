@@ -1,0 +1,238 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Expect <ImageGallery /> to render correctly 1`] = `
+<section
+  className="image-gallery"
+  id="image-gallery"
+>
+  <ul
+    className="images-container"
+  >
+    <li
+      className="image-card"
+    >
+      <div
+        className="header"
+      >
+        <div
+          className="header-info"
+        >
+          <h6>
+            Image title
+          </h6>
+          <p>
+            by: owner name
+          </p>
+          <p>
+            taken on: 07-10-2018
+          </p>
+        </div>
+        <div
+          className="flickr-link"
+        >
+          <a
+            href="https://www.some-url.com"
+            target="_blanc"
+            title="See on Flickr"
+          >
+            <i
+              className="fab fa-flickr"
+            />
+          </a>
+        </div>
+      </div>
+      <div
+        className="image-wrapper"
+      >
+        <img
+          alt="Image title.jpeg"
+          src="https://farm5.staticflickr.com/4850/45579906624_4dbf8572a6_n.jpg"
+        />
+      </div>
+      <div
+        className="footer"
+      >
+        <div
+          className="tag-label"
+        >
+          <i
+            className="fas fa-tags"
+          />
+          <h6>
+            Tags
+          </h6>
+        </div>
+        <ul
+          className="tags"
+        >
+          <li
+            className="listed-tag"
+          >
+            tag1
+          </li>
+          <li
+            className="listed-tag"
+          >
+            tag2
+          </li>
+          <li
+            className="listed-tag"
+          >
+            tag3
+          </li>
+        </ul>
+      </div>
+    </li>
+    <li
+      className="image-card"
+    >
+      <div
+        className="header"
+      >
+        <div
+          className="header-info"
+        >
+          <h6>
+            Image title
+          </h6>
+          <p>
+            by: owner name
+          </p>
+          <p>
+            taken on: 07-10-2018
+          </p>
+        </div>
+        <div
+          className="flickr-link"
+        >
+          <a
+            href="https://www.some-url.com"
+            target="_blanc"
+            title="See on Flickr"
+          >
+            <i
+              className="fab fa-flickr"
+            />
+          </a>
+        </div>
+      </div>
+      <div
+        className="image-wrapper"
+      >
+        <img
+          alt="Image title.jpeg"
+          src="https://farm5.staticflickr.com/4850/45579906624_4dbf8572a6_n.jpg"
+        />
+      </div>
+      <div
+        className="footer"
+      >
+        <div
+          className="tag-label"
+        >
+          <i
+            className="fas fa-tags"
+          />
+          <h6>
+            Tags
+          </h6>
+        </div>
+        <ul
+          className="tags"
+        >
+          <li
+            className="listed-tag"
+          >
+            tag1
+          </li>
+          <li
+            className="listed-tag"
+          >
+            tag2
+          </li>
+          <li
+            className="listed-tag"
+          >
+            tag3
+          </li>
+        </ul>
+      </div>
+    </li>
+    <li
+      className="image-card"
+    >
+      <div
+        className="header"
+      >
+        <div
+          className="header-info"
+        >
+          <h6>
+            Image title
+          </h6>
+          <p>
+            by: owner name
+          </p>
+          <p>
+            taken on: 07-10-2018
+          </p>
+        </div>
+        <div
+          className="flickr-link"
+        >
+          <a
+            href="https://www.some-url.com"
+            target="_blanc"
+            title="See on Flickr"
+          >
+            <i
+              className="fab fa-flickr"
+            />
+          </a>
+        </div>
+      </div>
+      <div
+        className="image-wrapper"
+      >
+        <img
+          alt="Image title.jpeg"
+          src="https://farm5.staticflickr.com/4850/45579906624_4dbf8572a6_n.jpg"
+        />
+      </div>
+      <div
+        className="footer"
+      >
+        <div
+          className="tag-label"
+        >
+          <i
+            className="fas fa-tags"
+          />
+          <h6>
+            Tags
+          </h6>
+        </div>
+        <ul
+          className="tags"
+        >
+          <li
+            className="listed-tag"
+          >
+            tag1
+          </li>
+          <li
+            className="listed-tag"
+          >
+            tag2
+          </li>
+          <li
+            className="listed-tag"
+          >
+            tag3
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+</section>
+`;

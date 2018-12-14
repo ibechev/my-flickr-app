@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const API_KEY = "6aacdfc2ae7edfa681a9bf5c55efd555";
 const IMAGES_PER_PAGE = 20;
 
