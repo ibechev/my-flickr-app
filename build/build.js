@@ -27,7 +27,7 @@ webpack(webpackConfig).run((err, stats) => {
 
   console.info(`webpack stats: ${stats}`);
 
-  // console log that the build has succeeded
+  // log that the build has succeeded
   console.info("Build worked, code is in dist folder");
 
   return 0;
