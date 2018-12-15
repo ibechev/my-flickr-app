@@ -167,13 +167,4 @@ describe("Expect <SearchBox />", () => {
     expect(tagsResult[0]).toEqual(testState.tags[0]);
     expect(tagsResult[1]).toEqual(testState.tags[1]);
   });
-
-  it("to set 'state.error' to a string, if <button class='search' /> is pressed and 'state.tags' is empty", done => {
-    const wrapper = setup(defaultProps, defaultState);
-    wrapper.find("button.search").simulate("click");
-    setTimeout(() => {
-      expect(typeof wrapper.state("error")).toEqual("string");
-      done();
-    }, 0);
-  });
 });
