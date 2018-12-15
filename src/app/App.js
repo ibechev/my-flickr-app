@@ -47,14 +47,15 @@ class App extends Component {
       this.setState(prevState => ({
         ...prevState,
         loading: false,
-        noResults: true
+        noResults: true,
+        noMorePages: true
       }));
     } else {
       this.setState(prevState => ({
         ...prevState,
         loading: false,
         noResults: false,
-        noMorePages: pages === prevState.pages,
+        noMorePages: pages === prevState.page,
         images,
         tags: tagsArray
       }));
