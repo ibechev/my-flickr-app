@@ -104,10 +104,6 @@ export class SearchBox extends Component {
     } = e;
 
     switch (keyCode) {
-      case 13: // Enter
-        this.handleSearch();
-        break;
-
       case 32: // Space
       case 188: // Comma
         this.addTag(e);
@@ -157,26 +153,24 @@ export class SearchBox extends Component {
     }));
   }
 
-  async handleSearch() {
+  async handleSearch(e) {
+    e.preventDefault();
     await this.addTag();
     const input = this.input.current;
-
     const { tags } = this.state;
-
     const error = searchValidation(tags);
-
-    if (!error) {
-      tags.length && this.props.search(tags);
-      input.blur();
-
-      this.state.error &&
-        this.setState(prevState => ({ ...prevState, error: null }));
-    } else {
+    if (error) {
       this.setState(prevState => ({
         ...prevState,
         error
       }));
       input.focus();
+    } else {
+      tags.length && this.props.search(tags);
+      input.blur();
+
+      this.state.error &&
+        this.setState(prevState => ({ ...prevState, error: null }));
     }
 
     this.searchButton.current.blur();
@@ -194,53 +188,55 @@ export class SearchBox extends Component {
         onClick={this.searchBoxFocus}
       >
         {error && <span className="error">{error}</span>}
+        <form action="" onSubmit={this.handleSearch}>
+          <section className="tags">
+            <ul className="tags-wrapper">
+              {tags.map((tag, i) => (
+                <Tag key={i} index={i} value={tag} removeTag={this.removeTag} />
+              ))}
 
-        <section className="tags">
-          <ul className="tags-wrapper">
-            {tags.map((tag, i) => (
-              <Tag key={i} index={i} value={tag} removeTag={this.removeTag} />
-            ))}
+              <li className="tags-input-wrapper">
+                <input
+                  id="tags-input"
+                  type="text"
+                  className="tags-input"
+                  size="4"
+                  autoComplete="off"
+                  onKeyDown={this.handleKeyDown}
+                  onChange={this.handleChange}
+                  autoFocus
+                  ref={this.input}
+                />
+              </li>
+            </ul>
 
-            <li className="tags-input-wrapper">
-              <input
-                id="tags-input"
-                type="text"
-                className="tags-input"
-                size="4"
-                autoComplete="off"
-                onKeyDown={this.handleKeyDown}
-                onChange={this.handleChange}
-                autoFocus
-                ref={this.input}
-              />
-            </li>
-          </ul>
+            {!tags.length && inputIsEmpty && (
+              <span className="placeholder">{this.placeholder}</span>
+            )}
+          </section>
 
-          {!tags.length && inputIsEmpty && (
-            <span className="placeholder">{this.placeholder}</span>
-          )}
-        </section>
+          <section className="controls">
+            <button
+              className="clear"
+              onClick={this.removeAllTags}
+              title="Clear all tags"
+              type="button"
+            >
+              <i className="far fa-trash-alt" />
+              Clear
+            </button>
 
-        <section className="controls">
-          <button
-            className="clear"
-            onClick={this.removeAllTags}
-            title="Clear all tags"
-          >
-            <i className="far fa-trash-alt" />
-            Clear
-          </button>
-
-          <button
-            className="search"
-            onClick={this.handleSearch}
-            ref={this.searchButton}
-            title="Search"
-          >
-            <i className="fas fa-search" />
-            Search
-          </button>
-        </section>
+            <button
+              className="search"
+              ref={this.searchButton}
+              title="Search"
+              type="submit"
+            >
+              <i className="fas fa-search" />
+              Search
+            </button>
+          </section>
+        </form>
       </section>
     );
   }

@@ -31,7 +31,7 @@
     position: absolute;
     top: 30vh;
     width: 100%;
-    font-size: 25rem;
+    font-size: 15rem;
     text-align: center;
     color: $primaryLight;
 
@@ -39,6 +39,10 @@
       margin-top: 2rem;
       font-size: 3rem;
       letter-spacing: 0.2rem;
+    }
+
+    @media screen and (orientation: landscape) {
+      top: 40vh;
     }
   }
 }
