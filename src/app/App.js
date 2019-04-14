@@ -1,138 +1,69 @@
-import React, { Component } from "react";
-import SearchBox from "./components/searchBox/SearchBox";
+import React, { useEffect } from "react";
+import PropTypes from "prop-types";
+import { connect } from "redhooks";
+import { fetchImagesAction } from "../app/actions/index";
+import {
+  START_FETCHING_MORE,
+  FETCHING_MORE_COMPLETE,
+  FETCH_IMAGES_ERROR
+} from "./actions/types";
+
+import SearchBoxContainer from "./components/searchBox/SearchBoxContainer";
 import ImageGallery from "./components/imageGallery/ImageGallery";
 
-import { getImages } from "./utilities/api";
+const App = ({ isFetchingMore, noMorePages, images, fetchImagesAction }) => {
+  useEffect(() => {
+    window.addEventListener("scroll", detectScrollEnd, false);
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.search = this.search.bind(this);
-    this.fetchMore = this.fetchMore.bind(this);
-    this.handleScroll = this.handleScroll.bind(this);
-
-    this.state = {
-      page: 1,
-      loading: false,
-      fetchingMore: false,
-      noMorePages: false,
-      noResults: false,
-      images: [],
-      tags: []
+    return function clearEventListener() {
+      window.removeEventListener("scroll", detectScrollEnd, false);
     };
-  }
+  });
 
-  componentDidMount() {
-    window.addEventListener("scroll", this.handleScroll, false);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("scroll", this.handleScroll, false);
-  }
-
-  async search(tagsArray) {
-    this.setState(prevState => {
-      return {
-        ...prevState,
-        loading: true
-      };
-    });
-
-    const { images, pages } = await getImages({ page: 1, tagsArray }).then(
-      res => res
-    );
-
-    if (!images.length) {
-      this.setState(prevState => ({
-        ...prevState,
-        loading: false,
-        noResults: true,
-        noMorePages: true
-      }));
-    } else {
-      this.setState(prevState => ({
-        ...prevState,
-        loading: false,
-        noResults: false,
-        noMorePages: pages === prevState.page,
-        images,
-        tags: tagsArray
-      }));
-    }
-  }
-
-  async fetchMore() {
-    this.setState(prevState => ({
-      ...prevState,
-      fetchingMore: true,
-      page: prevState.page + 1
-    }));
-
-    const { page, tags } = this.state;
-    const { images, pages } = await getImages({
-      page,
-      tagsArray: tags
-    }).then(res => res);
-
-    this.setState(prevState => ({
-      ...prevState,
-      fetchingMore: false,
-      images: [...prevState.images, ...images],
-      noMorePages: page === pages
-    }));
-  }
-
-  handleScroll() {
+  const detectScrollEnd = () => {
     const galleryH = document.getElementById("image-gallery").clientHeight;
     const searchBoxH = document.getElementById("search-box").clientHeight;
     const offsetFetchTrigger = galleryH + searchBoxH - window.innerHeight;
-    const { fetchingMore, noMorePages, images } = this.state;
 
     if (
       window.pageYOffset > offsetFetchTrigger &&
-      !fetchingMore &&
+      !isFetchingMore &&
       !noMorePages &&
-      images.length
+      !!images.length
     ) {
-      this.fetchMore();
+      window.removeEventListener("scroll", detectScrollEnd, false);
+      fetchImagesAction({
+        type: START_FETCHING_MORE,
+        meta: {
+          success: FETCHING_MORE_COMPLETE,
+          error: FETCH_IMAGES_ERROR
+        }
+      });
     }
-  }
+  };
 
-  render() {
-    const { images, loading, noResults, noMorePages } = this.state;
+  return (
+    <div className="main-container">
+      <SearchBoxContainer />
+      <ImageGallery />
+    </div>
+  );
+};
 
-    return (
-      <div className="main-container">
-        <SearchBox search={this.search} />
-        {!loading && !noResults && <ImageGallery images={images} />}
-        {loading && (
-          <span className="spinner-main">
-            <i className="fas fa-spinner fa-spin" />
-          </span>
-        )}
-        {images.length && !loading && !noMorePages && !noResults ? (
-          <span className="spinner-scroll">
-            <i className="fas fa-spinner fa-spin" />
-          </span>
-        ) : (
-          ""
-        )}
-        {!images.length && !loading && !noResults && (
-          <div className="images-placeholder">
-            <i className="fas fa-images " />
-            <h1>Search images on Fkickr</h1>
-          </div>
-        )}
-        {noResults && !loading && (
-          <div className="no-results-placeholder">
-            <i className="fas fa-frown" />
-            <h1>Oops, nothing found.</h1>
-          </div>
-        )}
-      </div>
-    );
-  }
-}
+const mapStateToProps = ({ isFetchingMore, noMorePages, images }) => ({
+  isFetchingMore,
+  noMorePages,
+  images
+});
 
-export default App;
+App.propTypes = {
+  isFetchingMore: PropTypes.bool.isRequired,
+  fetchImagesAction: PropTypes.func.isRequired,
+  noMorePages: PropTypes.bool.isRequired,
+  images: PropTypes.array
+};
+
+export default connect(
+  mapStateToProps,
+  { fetchImagesAction }
+)(App);

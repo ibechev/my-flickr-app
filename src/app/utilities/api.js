@@ -2,8 +2,8 @@
 const API_KEY = "6aacdfc2ae7edfa681a9bf5c55efd555";
 const IMAGES_PER_PAGE = 20;
 
-const getImagesBasicInfo = async ({ page, tagsArray }) => {
-  const tagsString = tagsArray.join("%2C");
+const getImagesBasicInfo = async ({ page, tags }) => {
+  const tagsString = tags.join("%2C");
   const url = `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${API_KEY}&tags=${tagsString}&per_page=${IMAGES_PER_PAGE}&page=${page}&format=json&nojsoncallback=1`;
 
   return await fetch(url)
@@ -16,6 +16,7 @@ const buildImageObject = async ({ farm, id, secret, server, title }) => {
   const thumbnail = `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}_n.jpg`;
   let flickrUrl = "";
 
+  const response = await fetch(urlInfo);
   const {
     stat,
     photo: {
@@ -24,9 +25,7 @@ const buildImageObject = async ({ farm, id, secret, server, title }) => {
       dates: { taken },
       urls: { url: urlArray }
     }
-  } = await fetch(urlInfo)
-    .then(response => response)
-    .then(result => result.json());
+  } = await response.json();
 
   urlArray.forEach(url => {
     if (url.type === "photopage") flickrUrl = url._content;
@@ -48,21 +47,24 @@ const buildImageObject = async ({ farm, id, secret, server, title }) => {
 
 export const getImages = async params => {
   const basicData = await getImagesBasicInfo(params).then(result => result);
-  const { pages, photo } = basicData.photos;
+  const {
+    photos: { pages, photo },
+    stat
+  } = basicData;
   let promisesArray;
 
   try {
-    if (basicData.stat === "ok") {
-      promisesArray = await photo.map(image => {
+    if (stat === "ok") {
+      promisesArray = photo.map(image => {
         return buildImageObject(image).then(res => res);
       });
+
+      return {
+        images: await Promise.all(promisesArray),
+        pages
+      };
     } else throw "There was a problem with Flickr api";
   } catch (error) {
-    console.warn(error);
+    if (DEVELOPMENT) throw new Error(error);
   }
-
-  return {
-    images: await Promise.all(promisesArray),
-    pages
-  };
 };

@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useRef } from "react";
 import PropTypes from "prop-types";
 
 const Tag = ({ index, removeTag, value }) => {
-  const handleRemoveTag = () => {
-    removeTag(index);
-  };
+  const indexRef = useRef(index);
+  indexRef.current = index;
+
+  const handleRemoveTag = useRef(() => {
+    removeTag(indexRef.current);
+  });
 
   return (
     <li className="tag">
       <p className="tag-name">{value}</p>
-      <button type="button" onClick={handleRemoveTag}>
+      <button type="button" onClick={handleRemoveTag.current}>
         <i className="fas fa-trash-alt" />
       </button>
     </li>

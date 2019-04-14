@@ -1,7 +1,9 @@
 import "babel-polyfill";
 import React from "react";
 import { ReactDOM, render } from "react-dom";
+import Provider from "redhooks";
 import App from "./app/App";
+import { store } from "./app/store";
 import "./app/index.scss";
 
 //enable hot module replacement;
@@ -17,4 +19,9 @@ if (DEVELOPMENT) {
   }
 }
 
-render(<App />, document.getElementById("root"));
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
+);
