@@ -1,249 +1,109 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import onClickOutside from "react-onclickoutside";
+
 import Tag from "../tag/Tag";
+import Button from "../button/Button";
 
-import { searchValidation } from "../../utilities/validation";
+export const SearchBox = ({
+  inputFocus,
+  inputValue,
+  error,
+  tags,
+  refs,
+  ...handle
+}) => {
+  const focusClass = inputFocus ? "focus" : "";
+  const errorClass = error ? "error" : "";
+  const placeholder = "... Enter tags here. Separate with space or comma";
 
-export class SearchBox extends Component {
-  constructor(props) {
-    super(props);
+  return (
+    <section
+      id="search-box"
+      className={`search-box ${errorClass} ${focusClass}`}
+      onClick={handle.searchBoxFocus}
+      ref={refs.searchBox}
+      data-test="search-box"
+    >
+      {error && (
+        <span className="error" data-test="input-error">
+          {error}
+        </span>
+      )}
 
-    this.addTag = this.addTag.bind(this);
-    this.removeTag = this.removeTag.bind(this);
-    this.removeAllTags = this.removeAllTags.bind(this);
-    this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSearch = this.handleSearch.bind(this);
-    this.searchBoxFocus = this.searchBoxFocus.bind(this);
+      <form action="" onSubmit={e => handle.addTag(e, inputValue.trim())}>
+        <section className="tags">
+          <ul className="tags-wrapper">
+            {tags.map((tag, i) => (
+              <Tag
+                key={tag}
+                index={i}
+                value={tag}
+                removeTag={handle.removeTag}
+              />
+            ))}
 
-    this.placeholder = "... Enter tags here. Separate with space or comma";
-    this.input = React.createRef();
-    this.searchButton = React.createRef();
+            <li className="tags-input-wrapper">
+              <input
+                id="tags-input"
+                type="text"
+                className="tags-input"
+                size="4"
+                autoComplete="off"
+                onKeyDown={handle.keyDown}
+                onChange={handle.change}
+                autoFocus
+                ref={refs.inputEl}
+                value={inputValue}
+              />
+            </li>
+          </ul>
 
-    this.state = {
-      tags: [],
-      inputIsEmpty: true,
-      inFocus: true,
-      error: null
-    };
-  }
+          {!tags.length && !inputValue.length && (
+            <span className="placeholder" data-test="tags-placeholder">
+              {placeholder}
+            </span>
+          )}
+        </section>
 
-  addTag(e) {
-    let inputValue = "";
-    const input = this.input.current;
-
-    if (e) {
-      e.preventDefault();
-      // get value from onKeyDown event (comma or space)
-      inputValue = e.target.value.trim();
-    } else {
-      // get value when the function is called from another function
-      inputValue = input && input.value.trim();
-    }
-
-    if (inputValue.length > 0) {
-      this.setState(prevState => ({
-        ...prevState,
-        tags: [...prevState.tags, inputValue],
-        inputIsEmpty: true,
-        error: null
-      }));
-
-      input && (input.value = "");
-    } else {
-      input && (input.value = "");
-    }
-  }
-
-  removeTag(e) {
-    // Remove tag when backspace is pressed
-    if (typeof e === "object") {
-      const { value } = e.target;
-
-      if (value.trim().length === 0 && this.state.tags.length) {
-        this.setState(prevState => {
-          const tempTags = [...prevState.tags];
-          tempTags.length && tempTags.pop();
-
-          return {
-            ...prevState,
-            tags: tempTags,
-            inputIsEmpty: true
-          };
-        });
-        e.target.value = "";
-      }
-      // Remove tag when 'Remove' button is clocked
-    } else if (typeof e === "number") {
-      this.setState(prevState => {
-        const tempTags = prevState.tags;
-        tempTags.splice(e, 1);
-        return {
-          ...prevState,
-          tags: tempTags,
-          inputIsEmpty: true
-        };
-      });
-    }
-  }
-
-  removeAllTags() {
-    this.state.tags.length &&
-      this.setState(prevState => ({
-        ...prevState,
-        tags: []
-      }));
-  }
-
-  handleKeyDown(e) {
-    const {
-      keyCode,
-      target,
-      target: { value }
-    } = e;
-
-    switch (keyCode) {
-      case 32: // Space
-      case 188: // Comma
-        this.addTag(e);
-        break;
-
-      case 8: // Backspace
-        this.removeTag(e);
-        break;
-
-      default:
-        // increase or decresce the length in the input element
-        target.size = value.length > 3 ? value.length + 1 : 4;
-    }
-  }
-
-  handleChange(e) {
-    const { inputIsEmpty } = this.state;
-    const inputElementIsEmpty = !e.target.value;
-    const { value } = e.target;
-
-    if (inputElementIsEmpty !== inputIsEmpty) {
-      this.setState(prevState => ({
-        ...prevState,
-        inputIsEmpty: inputElementIsEmpty
-      }));
-    }
-
-    // Change the size of the input on value paste
-    e.target.size = value.length > 3 ? value.length + 1 : 4;
-  }
-
-  searchBoxFocus(e) {
-    if (e.target !== this.searchButton.current) {
-      this.setState(prevState => ({
-        ...prevState,
-        inFocus: true
-      }));
-      this.input.current.focus();
-    }
-  }
-
-  // Provided from 'react-onclickoutside' package
-  handleClickOutside() {
-    this.setState(prevState => ({
-      ...prevState,
-      inFocus: false
-    }));
-  }
-
-  async handleSearch(e) {
-    e.preventDefault();
-    await this.addTag();
-    const input = this.input.current;
-    const { tags } = this.state;
-    const error = searchValidation(tags);
-    if (error) {
-      this.setState(prevState => ({
-        ...prevState,
-        error
-      }));
-      input.focus();
-    } else {
-      tags.length && this.props.search(tags);
-      input.blur();
-
-      this.state.error &&
-        this.setState(prevState => ({ ...prevState, error: null }));
-    }
-
-    this.searchButton.current.blur();
-  }
-
-  render() {
-    const { inFocus, tags, inputIsEmpty, error } = this.state;
-    const focusClass = inFocus ? "focus" : "";
-    const errorClass = error ? "error" : "";
-
-    return (
-      <section
-        id="search-box"
-        className={`search-box ${errorClass} ${focusClass}`}
-        onClick={this.searchBoxFocus}
-      >
-        {error && <span className="error">{error}</span>}
-        <form action="" onSubmit={this.handleSearch}>
-          <section className="tags">
-            <ul className="tags-wrapper">
-              {tags.map((tag, i) => (
-                <Tag key={i} index={i} value={tag} removeTag={this.removeTag} />
-              ))}
-
-              <li className="tags-input-wrapper">
-                <input
-                  id="tags-input"
-                  type="text"
-                  className="tags-input"
-                  size="4"
-                  autoComplete="off"
-                  onKeyDown={this.handleKeyDown}
-                  onChange={this.handleChange}
-                  autoFocus
-                  ref={this.input}
-                />
-              </li>
-            </ul>
-
-            {!tags.length && inputIsEmpty && (
-              <span className="placeholder">{this.placeholder}</span>
-            )}
-          </section>
-
-          <section className="controls">
-            <button
-              className="clear"
-              onClick={this.removeAllTags}
-              title="Clear all tags"
-              type="button"
-            >
-              <i className="far fa-trash-alt" />
-              Clear
-            </button>
-
-            <button
-              className="search"
-              ref={this.searchButton}
-              title="Search"
-              type="submit"
-            >
-              <i className="fas fa-search" />
-              Search
-            </button>
-          </section>
-        </form>
-      </section>
-    );
-  }
-}
-
-SearchBox.propTypes = {
-  search: PropTypes.func.isRequired
+        <section className="controls">
+          <Button
+            className="clear"
+            onClick={handle.removeAllTags}
+            title="Clear all tags"
+            type="button"
+            data-test="btn-clear-tags"
+          >
+            <i className="far fa-trash-alt" />
+            Clear
+          </Button>
+        </section>
+      </form>
+    </section>
+  );
 };
 
-export default onClickOutside(SearchBox);
+SearchBox.propTypes = {
+  tags: PropTypes.arrayOf(PropTypes.string),
+  inputValue: PropTypes.string,
+  inputFocus: PropTypes.bool.isRequired,
+  error: PropTypes.string,
+  refs: PropTypes.shape({
+    searchBox: PropTypes.shape({
+      current: PropTypes.node.isRequired.isRequired
+    }).isRequired,
+    inputEl: PropTypes.shape({
+      current: PropTypes.node.isRequired.isRequired
+    }).isRequired
+  }),
+  handle: PropTypes.shape({
+    searchBoxFocus: PropTypes.func.isrequired,
+    keyDown: PropTypes.func.isrequired,
+    addTag: PropTypes.func.isrequired,
+    change: PropTypes.func.isrequired,
+    search: PropTypes.func.isrequired,
+    removeTag: PropTypes.func.isrequired,
+    removeAllTags: PropTypes.func.isrequired
+  })
+};
+
+export default SearchBox;

@@ -6,6 +6,7 @@ exports[`Expect <SearchBox /> to render correctly 1`] = `
   id="search-box"
   onClick={[Function]}
 >
+  
   <form
     action=""
     onSubmit={[Function]}
@@ -28,6 +29,7 @@ exports[`Expect <SearchBox /> to render correctly 1`] = `
             onKeyDown={[Function]}
             size="4"
             type="text"
+            value=""
           />
         </li>
       </ul>
@@ -41,7 +43,7 @@ exports[`Expect <SearchBox /> to render correctly 1`] = `
       className="controls"
     >
       <button
-        className="clear"
+        className="btn clear"
         onClick={[Function]}
         title="Clear all tags"
         type="button"
@@ -50,16 +52,6 @@ exports[`Expect <SearchBox /> to render correctly 1`] = `
           className="far fa-trash-alt"
         />
         Clear
-      </button>
-      <button
-        className="search"
-        title="Search"
-        type="submit"
-      >
-        <i
-          className="fas fa-search"
-        />
-        Search
       </button>
     </section>
   </form>
