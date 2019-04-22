@@ -1,0 +1,19 @@
+.icon-dialog {
+  @include flex;
+  @include justify-content(center);
+  @include align-items(center);
+  position: absolute;
+  top: 50vh;
+  width: 100%;
+  font-size: 3rem;
+  text-align: center;
+
+  i {
+    font-size: 5rem;
+  }
+
+  .text {
+    letter-spacing: 0.1rem;
+    padding-left: 2rem;
+  }
+}
