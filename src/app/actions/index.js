@@ -28,7 +28,13 @@ export const fetchImagesAction = ({ type, payload = null, meta }) => async (
   const { page, tags } = getStore();
 
   await getImages({ page, tags })
-    .then(result => dispatch(action(meta.success, result)))
+    .then(result => {
+      const { tags } = getStore();
+
+      tags.length > 0
+        ? dispatch(action(meta.success, result))
+        : dispatch(action(types.RESET_STATE));
+    })
     .catch(error => {
       dispatch(action(meta.error, error));
       if (DEVELOPMENT) throw new Error(error);

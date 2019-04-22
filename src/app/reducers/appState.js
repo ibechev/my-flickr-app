@@ -6,8 +6,10 @@ import {
   ADD_TAG,
   REMOVE_TAG,
   REMOVE_ALL_TAGS,
-  CLEAR_IMAGES
+  CLEAR_IMAGES,
+  RESET_STATE
 } from "../actions/types";
+import { initialAppState } from "../config/initialAppState";
 
 const appStateReducerFunctions = {
   [START_SEARCH]: state => ({
@@ -67,7 +69,8 @@ const appStateReducerFunctions = {
   [CLEAR_IMAGES]: state => ({
     ...state,
     images: []
-  })
+  }),
+  [RESET_STATE]: () => ({ ...initialAppState })
 };
 
 export const appState = (state = {}, { type, payload }) => {

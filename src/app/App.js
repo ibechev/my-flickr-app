@@ -10,8 +10,17 @@ import {
 
 import SearchBoxContainer from "./components/searchBox/SearchBoxContainer";
 import ImageGallery from "./components/imageGallery/ImageGallery";
+import LoadingSearch from "./components/loadingSearch/LoadingSearch";
+import IconDialog from "./components/iconDialog/IconDialog";
 
-const App = ({ isFetchingMore, noMorePages, images, fetchImagesAction }) => {
+const App = ({
+  isFetchingMore,
+  fetchImagesAction,
+  noMorePages,
+  images,
+  searching,
+  noResults
+}) => {
   useEffect(() => {
     window.addEventListener("scroll", detectScrollEnd, false);
 
@@ -43,24 +52,45 @@ const App = ({ isFetchingMore, noMorePages, images, fetchImagesAction }) => {
   };
 
   return (
-    <div className="main-container">
+    <div className="app">
       <SearchBoxContainer />
+
       <ImageGallery />
+
+      {searching && <LoadingSearch />}
+
+      {!images.length && !searching && !noResults && (
+        <IconDialog icon="images-placeholder" text="Search images on Flickr" />
+      )}
+
+      {noResults && !searching && (
+        <IconDialog icon="no-results" text="Oops, nothing found." />
+      )}
     </div>
   );
 };
 
-const mapStateToProps = ({ isFetchingMore, noMorePages, images }) => ({
+const mapStateToProps = ({
   isFetchingMore,
   noMorePages,
-  images
+  images,
+  searching,
+  noResults
+}) => ({
+  isFetchingMore,
+  noMorePages,
+  images,
+  searching,
+  noResults
 });
 
 App.propTypes = {
   isFetchingMore: PropTypes.bool.isRequired,
   fetchImagesAction: PropTypes.func.isRequired,
   noMorePages: PropTypes.bool.isRequired,
-  images: PropTypes.array
+  images: PropTypes.array,
+  searching: PropTypes.bool.isRequired,
+  noResults: PropTypes.bool.isRequired
 };
 
 export default connect(

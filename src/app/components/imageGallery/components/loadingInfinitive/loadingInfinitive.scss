@@ -1,0 +1,17 @@
+.loading-infinitive {
+  @include inline-flex;
+  @include justify-content(center);
+  @include align-items(center);
+  position: relative;
+  left: 42%;
+  padding: 2rem 0;
+  font-size: 2rem;
+
+  i {
+    font-size: 3rem;
+  }
+
+  .title {
+    padding-left: 1rem;
+  }
+}

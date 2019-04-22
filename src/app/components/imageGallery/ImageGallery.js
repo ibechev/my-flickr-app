@@ -2,20 +2,15 @@ import React from "react";
 import { useStore } from "redhooks";
 import PropTypes from "prop-types";
 import ImageCard from "../imageCard/ImageCard";
+import LoadingInfinitive from "./components/loadingInfinitive/LoadingInfinitive";
 
 const ImageGallery = () => {
   const {
-    state: { searching, noResults, noMorePages, images }
+    state: { searching, images, isFetchingMore }
   } = useStore();
 
   return (
     <section id="image-gallery" className="image-gallery">
-      {searching && (
-        <span className="spinner-main">
-          <i className="fas fa-spinner fa-spin" />
-        </span>
-      )}
-
       {!!images && !!images.length && !searching && (
         <ul className="images-container">
           {images.map((image, i) => (
@@ -24,25 +19,7 @@ const ImageGallery = () => {
         </ul>
       )}
 
-      {!!images.length && !searching && !noMorePages && !noResults && (
-        <span className="spinner-scroll">
-          <i className="fas fa-spinner fa-spin" />
-        </span>
-      )}
-
-      {!images.length && !searching && !noResults && (
-        <div className="images-placeholder">
-          <i className="fas fa-images " />
-          <h1>Search images on Flickr</h1>
-        </div>
-      )}
-
-      {noResults && !searching && (
-        <div className="no-results-placeholder">
-          <i className="fas fa-frown" />
-          <h1>Oops, nothing found.</h1>
-        </div>
-      )}
+      {isFetchingMore && <LoadingInfinitive />}
     </section>
   );
 };

@@ -65,13 +65,16 @@ const SearchBoxContainer = ({
     // Clear old errors, if there are no new ones
     !tmpError.length && error.length && setError("");
 
-    fetchImagesAction({
-      type: START_SEARCH,
-      meta: {
-        success: SEARCH_COMPLETE,
-        error: FETCH_IMAGES_ERROR
-      }
-    });
+    return (
+      tags.length !== 0 &&
+      fetchImagesAction({
+        type: START_SEARCH,
+        meta: {
+          success: SEARCH_COMPLETE,
+          error: FETCH_IMAGES_ERROR
+        }
+      })
+    );
   };
 
   const handleKeyDown = e => {
