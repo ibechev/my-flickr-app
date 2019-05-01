@@ -4,13 +4,8 @@ An app that allows the user to search for a Flickr photos by tag name. The page 
 
 ## Basic Tech Stack
 
-my-flickr-app is built with [React-Express-Webpack Template]("https://github.com/ibechev/react-express-webpack-boilerplate.git"), which uses **React**, **Express** and **Webpack 4**. The project also includes the frameworks **Jest** and **Enzyme** for testing.
-
-### Current versions
-
-- React 16.4
-- Express 4
-- Webpack 4
+- React 16.8.3
+- Webpack 4.21.0
 - Webpack-dev-middleware 3
 - Webpack-hot-middleware 2
 - Babel-core 6
