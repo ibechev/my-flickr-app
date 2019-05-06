@@ -8,17 +8,14 @@ my-flickr-app is built with [React-Express-Webpack Template]("https://github.com
 
 ### Current versions
 
-- React 16.4
-- Express 4
+- React 16
 - Webpack 4
-- Webpack-dev-middleware 3
-- Webpack-hot-middleware 2
-- Babel-core 6
-- Jest 23
+- Babel-core 7
+- Jest 24
 - Enzyme 3
-- ESLint 3
+- ESLint 5
 
-## Development environment
+## Starting WebpackDevServer in Development environment
 
 ```sh
 git clone
@@ -35,16 +32,8 @@ npm start
 
 Project will open at [http://localhost:3000/](http://localhost:3000/)
 
-## Production environment
-
-For production, run the 'build' script to transpile code to 'dist' folder. The 'start:dist' script runs the production code in localhost to ensure the app is running correctly usine 'dist' filder files:
+## Build static assets for Production environment
 
 ```sh
-# run build with webpack and generate bundle files in dist folder
 npm run build
-
-# run the built files and view in browser
-npm run start:dist
 ```
-
-Project will open at [http://localhost:4000/](http://localhost:4000/)
