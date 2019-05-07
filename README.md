@@ -4,16 +4,18 @@ An app that allows the user to search for a Flickr photos by tag name. The page 
 
 ## Basic Tech Stack
 
-- React 16.8.3
-- Webpack 4.21.0
-- Webpack-dev-middleware 3
-- Webpack-hot-middleware 2
-- Babel-core 6
-- Jest 23
-- Enzyme 3
-- ESLint 3
+my-flickr-app is built with [React-Express-Webpack Template]("https://github.com/ibechev/react-express-webpack-boilerplate.git"), which uses **React**, **Express** and **Webpack 4**. The project also includes the frameworks **Jest** and **Enzyme** for testing.
 
-## Development environment
+### Current versions
+
+- React 16
+- Webpack 4
+- Babel-core 7
+- Jest 24
+- Enzyme 3
+- ESLint 5
+
+## Starting WebpackDevServer in Development environment
 
 ```sh
 git clone
@@ -30,16 +32,8 @@ npm start
 
 Project will open at [http://localhost:3000/](http://localhost:3000/)
 
-## Production environment
-
-For production, run the 'build' script to transpile code to 'dist' folder. The 'start:dist' script runs the production code in localhost to ensure the app is running correctly usine 'dist' filder files:
+## Build static assets for Production environment
 
 ```sh
-# run build with webpack and generate bundle files in dist folder
 npm run build
-
-# run the built files and view in browser
-npm run start:dist
 ```
-
-Project will open at [http://localhost:4000/](http://localhost:4000/)

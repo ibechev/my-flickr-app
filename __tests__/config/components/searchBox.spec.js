@@ -1,8 +1,8 @@
 import React, { createRef } from "react";
 import renderer from "react-test-renderer";
-import { SearchBox } from "./SearchBox";
-import { propTypeErrors } from "../../../../tests/testUtils";
-import { testTags } from "../../../../tests/testValues";
+import { SearchBox } from "../../../src/app/components/searchBox/SearchBox";
+import { propTypeErrors } from "../../testUtils";
+import { testTags } from "../../testValues";
 import { mount } from "enzyme";
 
 describe("Expect <SearchBox />", () => {

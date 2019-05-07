@@ -1,6 +1,6 @@
 {
   "root": true,
-  "plugins": ["react", "jest"],
+  "plugins": ["react", "jest", "class-property"],
   "extends": [
     "eslint:recommended",
     "plugin:import/errors",
