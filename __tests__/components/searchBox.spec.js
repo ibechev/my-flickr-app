@@ -1,8 +1,8 @@
 import React, { createRef } from "react";
 import renderer from "react-test-renderer";
-import { SearchBox } from "../../../src/app/components/searchBox/SearchBox";
-import { propTypeErrors } from "../../testUtils";
-import { testTags } from "../../testValues";
+import { SearchBox } from "../../src/app/components/searchBox/SearchBox";
+import { propTypeErrors } from "../testUtils";
+import { testTags } from "../testValues";
 import { mount } from "enzyme";
 
 describe("Expect <SearchBox />", () => {
@@ -107,73 +107,4 @@ describe("Expect <SearchBox />", () => {
   });
 
   it("to call 'props.addTag' only when 'props.inputValue' is not an empty string AND 'props.error' IS an empty string", () => {});
-
-  describe("to call 'props.removeTag' only when", () => {
-    it();
-  });
-
-  // it("to remove all tags when button 'Clear' is clicked", () => {
-  //   const testState = {
-  //     tags: [...testTags]
-  //   };
-  //   const wrapper = setup(defaultProps, testState);
-  //   wrapper.find("button.clear").simulate("click");
-  //   expect(wrapper.state("tags")).toHaveLength(0);
-  // });
-
-  // it("to add anothet tag when comma or space is pressed and the 'input' is not empty", () => {
-  //   const testState = {
-  //     tags: [...testTags]
-  //   };
-  //   const valueOne = "sandwich";
-  //   const valueTwo = "alpha";
-  //   const wrapper = setup(defaultProps, testState);
-  //   const input = wrapper.find("input.tags-input");
-
-  //   input.simulate("focus");
-  //   input.simulate("keyDown", {
-  //     keyCode: 32, // space
-  //     target: { value: valueOne },
-  //     preventDefault() {}
-  //   });
-
-  //   const tagsResultOne = [...wrapper.state("tags")];
-  //   expect(tagsResultOne).toHaveLength(testState.tags.length + 1);
-  //   expect(tagsResultOne.pop()).toEqual(valueOne);
-
-  //   input.simulate("keyDown", {
-  //     keyCode: 188, // comma
-  //     target: { value: valueTwo },
-  //     preventDefault() {}
-  //   });
-
-  //   const tagsResultTwo = [...wrapper.state("tags")];
-  //   expect(tagsResultTwo).toHaveLength(testState.tags.length + 2);
-  //   expect(tagsResultTwo.pop()).toEqual(valueTwo);
-  // });
-
-  // it("to set focus on the 'input' and set 'state.inFocus' to 'true' when user clicks on <section class='search-box'", () => {
-  //   const wrapper = setup(defaultProps);
-  //   wrapper.find("section.search-box").simulate("click", { target: {} });
-  //   expect(wrapper.find("section.search-box").hasClass("focus")).toEqual(true);
-  //   expect(wrapper.state("inFocus")).toEqual(true);
-  // });
-
-  // it("to remove single tag from 'state.tags', each time backspace is pressed", () => {
-  //   const testState = {
-  //     tags: [...testTags]
-  //   };
-  //   const wrapper = setup(defaultProps, testState);
-  //   const input = wrapper.find("input.tags-input");
-
-  //   input.simulate("focus");
-  //   input.simulate("keyDown", {
-  //     keyCode: 8, // backspace
-  //     target: { value: "" }
-  //   });
-  //   const tagsResult = [...wrapper.state("tags")];
-  //   expect(tagsResult).toHaveLength(testState.tags.length - 1);
-  //   expect(tagsResult[0]).toEqual(testState.tags[0]);
-  //   expect(tagsResult[1]).toEqual(testState.tags[1]);
-  // });
 });

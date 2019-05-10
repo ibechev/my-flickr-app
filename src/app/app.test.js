@@ -24,7 +24,6 @@ describe("Expect <App />", () => {
   it.only("to render correctly", () => {
     // const wrapper = renderer.create(<App />).toJSON();
     // expect(wrapper).toMatchSnapshot();
-    console.log("Refactor tests");
   });
 
   it("to only display <ImageGallery />, if 'state.loading' is 'false' and 'state.noResults' is 'false'", () => {

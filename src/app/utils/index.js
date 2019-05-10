@@ -1,3 +1,14 @@
+export const queryStringFromTags = tagsList =>
+  `?${tagsList.map(tag => tag).join("&")}`;
+
+export const formatDate = date => {
+  return date
+    .split(" ")[0]
+    .split("-")
+    .reverse()
+    .join("-");
+};
+
 export const formatTitle = title => {
   let cutIndex;
   if (
@@ -12,3 +23,5 @@ export const formatTitle = title => {
 
   return title.slice(0, title.length - cutIndex);
 };
+
+export const encodeURITags = tags => tags.map(tag => encodeURIComponent(tag));

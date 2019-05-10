@@ -1,14 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { connect } from "redhooks";
-import { validateInput, validateSearch } from "../../utilities/validation";
+import queryString from "query-string";
+import { validateInput, validateSearch } from "../../utils/validation";
 import {
   addTag,
+  addTags,
   removeTag,
   removeAllTags,
   clearImages,
   fetchImagesAction
 } from "../../actions/index";
+import { encodeURITags } from "../../utils";
+
 import {
   START_SEARCH,
   SEARCH_COMPLETE,
@@ -20,10 +24,13 @@ import SearchBox from "./SearchBox";
 const SearchBoxContainer = ({
   tags,
   addTag,
+  addTags,
   removeTag,
   removeAllTags,
   clearImages,
-  fetchImagesAction
+  fetchImagesAction,
+  location,
+  history
 }) => {
   const [inputValue, setInputValue] = useState("");
   const [inputFocus, setInputFocus] = useState(true);
@@ -32,6 +39,19 @@ const SearchBoxContainer = ({
     searchBox: useRef(null),
     inputEl: useRef(null)
   };
+
+  useEffect(() => {
+    const paramName = "tags";
+    const query = queryString.parse(location.search);
+
+    if (query === undefined || query[paramName] === undefined) return;
+
+    query[paramName] = query[paramName].trim();
+
+    if (query[paramName].length > 0) {
+      addTags(query[paramName].split(" "));
+    }
+  }, []);
 
   useEffect(() => {
     window.addEventListener("click", clickListener, false);
@@ -49,8 +69,15 @@ const SearchBoxContainer = ({
     // Prevent the execution of the functions on the first render
     if (!isMounted.current) {
       isMounted.current = true;
+      return;
+    }
+
+    if (tags.length !== 0) {
+      handleSearch(tags, error, setError);
+      history.replace(`/?tags=${encodeURITags(tags).join("%20")}`);
     } else {
-      tags.length ? handleSearch(tags, error, setError) : clearImages();
+      clearImages();
+      history.replace("/");
     }
   }, [tags]);
 
@@ -65,16 +92,15 @@ const SearchBoxContainer = ({
     // Clear old errors, if there are no new ones
     !tmpError.length && error.length && setError("");
 
-    return (
-      tags.length !== 0 &&
-      fetchImagesAction({
-        type: START_SEARCH,
-        meta: {
-          success: SEARCH_COMPLETE,
-          error: FETCH_IMAGES_ERROR
-        }
-      })
-    );
+    fetchImagesAction({
+      type: START_SEARCH,
+      meta: {
+        success: SEARCH_COMPLETE,
+        error: FETCH_IMAGES_ERROR
+      }
+    });
+
+    clearImages();
   };
 
   const handleKeyDown = e => {
@@ -179,13 +205,16 @@ SearchBoxContainer.propTypes = {
   tags: PropTypes.arrayOf(PropTypes.string),
   fetchImagesAction: PropTypes.func.isRequired,
   addTag: PropTypes.func.isRequired,
+  addTags: PropTypes.func.isRequired,
   removeTag: PropTypes.func.isRequired,
   removeAllTags: PropTypes.func.isRequired,
-  clearImages: PropTypes.func.isRequired
+  clearImages: PropTypes.func.isRequired,
+  location: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
 };
 
 export default connect(
   mapStateToProps,
 
-  { addTag, removeTag, removeAllTags, clearImages, fetchImagesAction }
+  { addTag, addTags, removeTag, removeAllTags, clearImages, fetchImagesAction }
 )(SearchBoxContainer);

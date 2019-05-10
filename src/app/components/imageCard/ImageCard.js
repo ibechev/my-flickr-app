@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { formatTitle } from "../../../app/utilities/formatTitle";
-import { formatDate } from "../../utilities/formatDate";
+import { formatTitle, formatDate } from "../../../app/utils";
 
 const ImageCard = ({ title, owner, tags, taken, flickrUrl, thumbnail }) => {
   return (

@@ -4,6 +4,7 @@ import {
   START_FETCHING_MORE,
   FETCHING_MORE_COMPLETE,
   ADD_TAG,
+  ADD_TAGS,
   REMOVE_TAG,
   REMOVE_ALL_TAGS,
   CLEAR_IMAGES,
@@ -37,6 +38,12 @@ const appStateReducerFunctions = {
   [ADD_TAG]: (state, payload) => ({
     ...state,
     tags: [...state.tags, payload],
+    inputError: null,
+    page: 1
+  }),
+  [ADD_TAGS]: (state, payload) => ({
+    ...state,
+    tags: [...state.tags, ...payload],
     inputError: null,
     page: 1
   }),

@@ -1,5 +1,5 @@
 import React from "react";
-import { useLoadingDots } from "../../utilities";
+import { useLoadingDots } from "../../utils/hooks";
 
 const LoadingSearch = () => {
   const dots = useLoadingDots();
