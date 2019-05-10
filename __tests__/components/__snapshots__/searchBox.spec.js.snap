@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Expect <SearchBox /> to render correctly 1`] = `
+<section
+  className="search-box  focus"
+  data-test="search-box"
+  id="search-box"
+  onClick={[Function]}
+>
+  
+  <form
+    action=""
+    onSubmit={[Function]}
+  >
+    <section
+      className="tags"
+    >
+      <ul
+        className="tags-wrapper"
+      >
+        <li
+          className="tags-input-wrapper"
+        >
+          <input
+            autoComplete="off"
+            autoFocus={true}
+            className="tags-input"
+            id="tags-input"
+            onChange={[Function]}
+            onKeyDown={[Function]}
+            size="4"
+            type="text"
+            value=""
+          />
+        </li>
+      </ul>
+      <span
+        className="placeholder"
+        data-test="tags-placeholder"
+      >
+        ... Enter tags here. Separate with space or comma
+      </span>
+    </section>
+    <section
+      className="controls"
+    >
+      <button
+        className="btn clear"
+        data-test="btn-clear-tags"
+        onClick={[Function]}
+        title="Clear all tags"
+        type="button"
+      >
+        <i
+          className="far fa-trash-alt"
+        />
+        Clear
+      </button>
+    </section>
+  </form>
+</section>
+`;

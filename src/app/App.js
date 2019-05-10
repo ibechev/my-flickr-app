@@ -19,7 +19,9 @@ const App = ({
   noMorePages,
   images,
   searching,
-  noResults
+  noResults,
+  location,
+  history
 }) => {
   useEffect(() => {
     window.addEventListener("scroll", detectScrollEnd, false);
@@ -53,7 +55,7 @@ const App = ({
 
   return (
     <div className="app">
-      <SearchBoxContainer />
+      <SearchBoxContainer history={history} location={location} />
 
       <ImageGallery />
 
@@ -90,7 +92,9 @@ App.propTypes = {
   noMorePages: PropTypes.bool.isRequired,
   images: PropTypes.array,
   searching: PropTypes.bool.isRequired,
-  noResults: PropTypes.bool.isRequired
+  noResults: PropTypes.bool.isRequired,
+  location: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
 };
 
 export default connect(

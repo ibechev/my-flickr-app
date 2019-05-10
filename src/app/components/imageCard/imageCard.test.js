@@ -1,11 +1,10 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import ImageCard from "./ImageCard";
-import { propTypeErrors } from "../../../../tests/testUtils";
-import { image } from "../../../../tests/testValues";
+import { propTypeErrors } from "../../../../__tests__/testUtils";
+import { image } from "../../../../__tests__/testValues";
 import { shallow } from "enzyme";
-import { formatTitle } from "../../utilities/formatTitle";
-import { formatDate } from "../../utilities/formatDate";
+import { formatTitle, formatDate } from "../../utils";
 
 describe("Expect <ImageCard />", () => {
   const defaultProps = { ...image };

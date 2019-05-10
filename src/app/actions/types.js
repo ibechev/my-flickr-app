@@ -6,6 +6,7 @@ export const FETCH_IMAGES_ERROR = "FETCH_IMAGES_ERROR";
 export const START_FETCHING_MORE = "START_FETCHING_MORE";
 export const FETCHING_MORE_COMPLETE = "FETCHING_MORE_COMPLETE";
 export const ADD_TAG = "ADD_TAG";
+export const ADD_TAGS = "ADD_TAGS";
 export const REMOVE_TAG = "REMOVE_TAG";
 export const REMOVE_ALL_TAGS = "REMOVE_ALL_TAGS";
 export const CLEAR_IMAGES = "CLEAR_IMAGES";

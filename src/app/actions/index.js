@@ -1,5 +1,5 @@
 import * as types from "./types";
-import { getImages } from "../utilities/api";
+import { getImages } from "../utils/api";
 
 export const action = (type, payload = null) => ({ type, payload });
 
@@ -18,6 +18,12 @@ export const clearImages = () => action(types.CLEAR_IMAGES);
  * @param {string} inputValue
  */
 export const addTag = inputValue => action(types.ADD_TAG, inputValue);
+
+/**
+ *
+ * @param {[Sting]} tags
+ */
+export const addTags = tags => action(types.ADD_TAGS, tags);
 
 export const fetchImagesAction = ({ type, payload = null, meta }) => async (
   dispatch,

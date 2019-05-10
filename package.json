@@ -7,30 +7,18 @@
     "clean:dist": "rm -f ./dist/*",
     "start": "cross-env NODE_ENV=development webpack-dev-server --hot --config webpack.dev.js",
     "build": "cross-env NODE_ENV=production webpack --mode production --progress  --config webpack.prod.js",
-    "test": "jest",
-    "test:watch": "npm test -- --watch"
+    "test": "jest __tests__",
+    "test:watch": "npm test -- --watch",
+    "jest": "$(npm bin)/jest"
   },
   "jest": {
-    "automock": false,
-    "setupFiles": [
-      "<rootDir>/__tests__/config/index.js"
-    ],
-    "collectCoverage": false,
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx}",
-      "!**/node_modules/**",
-      "!**/vendor/**",
-      "!src/index.js"
-    ],
-    "testURL": "http://localhost",
     "testRegex": ".*\\.spec\\.js$",
-    "setupTestFrameworkScriptFile": "./__tests__/config/index.js",
+    "setupFilesAfterEnv": [
+      "./__tests__/config/index.js"
+    ],
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__tests__/config/fileMock.js",
       "\\.(css|less|scss)$": "<rootDir>/__tests__/config/styleMock.js"
-    },
-    "globals": {
-      "DEVELOPMENT": true
     }
   },
   "repository": {
@@ -40,7 +28,14 @@
   "author": "Ivan Bechev",
   "license": "ISC",
   "dependencies": {
-    "@babel/runtime": "^7.4.3"
+    "@babel/runtime": "^7.4.3",
+    "prop-types": "^15.7.2",
+    "query-string": "^6.5.0",
+    "react": "^16.8.5",
+    "react-dom": "^16.8.5",
+    "react-router-dom": "^5.0.0",
+    "redhooks": "^1.1.0",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",
@@ -48,10 +43,10 @@
     "@babel/plugin-transform-runtime": "^7.4.3",
     "@babel/preset-env": "^7.4.2",
     "@babel/preset-react": "^7.0.0",
-    "acorn": "^6.1.1",
+    "@babel/register": "^7.4.4",
     "autoprefixer": "^9.5.1",
+    "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
-    "babel-jest": "^24.7.1",
     "babel-loader": "^8.0.5",
     "check-prop-types": "^1.1.2",
     "cross-env": "^5.2.0",
@@ -68,16 +63,12 @@
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^24.8.0",
+    "jest-cli": "^24.8.0",
     "mini-css-extract-plugin": "^0.6.0",
     "node-sass": "^4.11.0",
     "postcss-loader": "^3.0.0",
-    "prop-types": "^15.7.2",
-    "react": "^16.8.5",
-    "react-dom": "^16.8.5",
     "react-svg-loader": "^2.1.0",
     "react-test-renderer": "^16.8.6",
-    "redhooks": "^1.1.0",
-    "redux-thunk": "^2.3.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "uglifyjs-webpack-plugin": "^2.1.2",

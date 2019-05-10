@@ -8,7 +8,7 @@ const path = require("path");
 const mode = process.env.NODE_ENV || "development";
 const devMode = mode === "development";
 const devtool = devMode ? "cheap-module-eval-source-map" : "none";
-
+console.log("#############   Runnint Common.js");
 const postcssLoaderPlugins = devMode
   ? [autoprefixer]
   : [
@@ -44,7 +44,7 @@ const config = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
+        exclude: /(node_modules|bower_components)/,
         use: {
           loader: "babel-loader"
         }
