@@ -13,7 +13,7 @@
         "build": "cross-env NODE_ENV=production webpack --mode production --progress  --config webpack.prod.js",
         "start": "node ./server/index.js",
         "build:start": "npm run build && node ./server/index.js",
-        "heroku-prebuild": "echo 'rebuild node-sass' && npm rebuild node-sass",
+        "heroku-prebuild": "touch dist && pwd && npm rebuild node-sass",
         "test": "jest __tests__",
         "test:watch": "npm test -- --watch",
         "jest": "$(npm bin)/jest"
