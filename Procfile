@@ -1,1 +1,0 @@
-web: npm rebuild node-sass && npm run build && node ./server/index.js
