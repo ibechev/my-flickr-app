@@ -10,7 +10,7 @@
     "scripts": {
         "clean:dist": "rm -f ./dist/*",
         "dev": "cross-env NODE_ENV=development webpack-dev-server --hot --config ./webpack.dev.js",
-        "build:local": "cross-env NODE_ENV=production webpack --mode production --progress  --config ./webpack.prod.js",
+        "build:prod:local": "cross-env NODE_ENV=production webpack --mode production --progress  --config ./webpack.prod.js",
         "build": "webpack -p --config ./webpack.prod.js --progress",
         "start": "node ./server.js",
         "build:start": "node ./server.js",
