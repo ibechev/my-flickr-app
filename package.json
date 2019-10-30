@@ -9,12 +9,12 @@
     "main": "index.js",
     "scripts": {
         "clean:dist": "rm -f ./dist/*",
-        "dev": "cross-env NODE_ENV=development webpack-dev-server --hot --config webpack.dev.js",
-        "build": "cross-env NODE_ENV=production webpack --mode production --progress  --config webpack.prod.js",
+        "dev": "cross-env NODE_ENV=development webpack-dev-server --hot --config ./webpack.dev.js",
+        "build:local": "cross-env NODE_ENV=production webpack --mode production --progress  --config ./webpack.prod.js",
         "start": "node ./server.js",
         "build:start": "node ./server.js",
         "heroku-prebuild": "mkdir dist && npm rebuild node-sass",
-        "heroku-postbuild": "npm run build",
+        "postinstall": "webpack -p --config ./webpack.prod.js --progress",
         "test": "jest __tests__",
         "test:watch": "npm test -- --watch",
         "jest": "$(npm bin)/jest"
