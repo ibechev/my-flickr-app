@@ -10,8 +10,8 @@
     "scripts": {
         "clean:dist": "rm -f ./dist/*",
         "dev": "cross-env NODE_ENV=development webpack-dev-server --hot --config ./webpack.dev.js",
-        "build:prod:local": "cross-env NODE_ENV=production webpack --mode production --progress  --config ./webpack.prod.js",
-        "build": "webpack -p --config ./webpack.prod.js --progress",
+        "local:build:prod": "cross-env NODE_ENV=production webpack --mode production --progress  --config ./webpack.prod.js",
+        "build": "webpack -p --config ./webpack.prod.js --progress && pwd",
         "start": "node ./server.js",
         "build:start": "node ./server.js",
         "heroku-prebuild": "mkdir dist && npm rebuild node-sass",
